@@ -25,5 +25,15 @@ namespace Part3.Controllers
         {
             return "my name is "+name+" and my roll no is " + id;
         } 
+        public ViewResult ContryList()
+        {
+            ViewBag.countires = new List<string>()
+            {
+                "Nepal",
+                "China",
+                "US"
+            };
+            return View();
+        }
     }
 }
