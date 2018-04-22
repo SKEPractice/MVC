@@ -17,5 +17,13 @@ namespace Part3.Controllers
         {
             return "Get details Invoked";
         }
+        public string RollName(string id)
+        {
+            return "my roll no is " + id+" Name= "+Request.QueryString["name"];
+        }
+        public string RollParameter(string id, string name)
+        {
+            return "my name is "+name+" and my roll no is " + id;
+        } 
     }
 }
