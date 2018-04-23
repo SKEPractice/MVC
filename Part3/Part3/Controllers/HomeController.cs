@@ -35,5 +35,15 @@ namespace Part3.Controllers
             };
             return View();
         }
+        public ActionResult BookList()
+        {
+            ViewData["books"] = new List<string>
+            {
+                "Maths",
+                "Science",
+                "English"
+            };
+            return View();
+        }
     }
 }
