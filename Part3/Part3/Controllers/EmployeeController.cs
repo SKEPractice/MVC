@@ -8,10 +8,11 @@ namespace Part3.Controllers
 {
     public class EmployeeController : Controller
     {
+        EmployeeContext employeeContext = new EmployeeContext();
         // GET: Employee
         public ActionResult Details(int id)
         {
-            EmployeeContext employeeContext = new EmployeeContext();
+            
             Employee employee = employeeContext.employees.Single(emp => emp.EmployeeID == id);
             //Employee employee = new Employee();
             //employee.EmployeeID = 01;
@@ -19,6 +20,11 @@ namespace Part3.Controllers
             //employee.Gender = "Male";
             //employee.City = "Kathmandu"; 
             return View(employee);
+        }
+        public ActionResult EmployeeList()
+        {
+            List<Employee> employeeList = employeeContext.employees.ToList();
+            return View(employeeList);
         }
     }
 }

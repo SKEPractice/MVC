@@ -3,11 +3,12 @@
 @{
     ViewBag.Title = "Employee Details";
 }
-
+<script src="~/Scripts/bootstrap.bundle.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <h2>Employee Details</h2>
-<table>
+<table class="table table-dark">
     <tr>
-        <td>Employee ID</td>
+        <td>EmployeeID</td>
         <td>@Model.EmployeeID</td>
     </tr>
     <tr>
@@ -23,3 +24,4 @@
         <td>@Model.City</td>
     </tr>
 </table>
+@Html.ActionLink("Back to List","EmployeeList")
