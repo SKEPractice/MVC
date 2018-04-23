@@ -6,13 +6,11 @@ using System.Web;
 
 namespace Part3.Models
 {
-    [Table("tblEmployee")]
-    public class Employee
+    [Table("tblDepartment")]
+    public class Department
     {
-        public int EmployeeID{ get; set; }
-        public string Name { get; set; }
-        public string Gender { get; set; }
-        public string City { get; set; }
         public int DepartmentID { get; set; }
+        public string Name { get; set; }
+        public List<Employee> Employees { get; set; }
     }
 }

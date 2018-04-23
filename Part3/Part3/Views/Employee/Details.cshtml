@@ -1,5 +1,4 @@
 ﻿@model Part3.Models.Employee
-
 @{
     ViewBag.Title = "Employee Details";
 }
@@ -24,4 +23,4 @@
         <td>@Model.City</td>
     </tr>
 </table>
-@Html.ActionLink("Back to List","EmployeeList")
+@Html.ActionLink("Back to List","EmployeeList",new { departmentID = Model.DepartmentID })

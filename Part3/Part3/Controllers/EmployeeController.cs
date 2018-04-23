@@ -21,9 +21,9 @@ namespace Part3.Controllers
             //employee.City = "Kathmandu"; 
             return View(employee);
         }
-        public ActionResult EmployeeList()
+        public ActionResult EmployeeList(int departmentID)
         {
-            List<Employee> employeeList = employeeContext.employees.ToList();
+            List<Employee> employeeList = employeeContext.employees.Where(emp=>emp.DepartmentID==departmentID).ToList();
             return View(employeeList);
         }
     }

@@ -9,6 +9,6 @@ namespace Part3.Models
     public class EmployeeContext : DbContext
     {
         public DbSet<Employee> employees { get; set; }
-
+        public DbSet<Department> Departments { get; set; }
     }
 }

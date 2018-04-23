@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Part3.Models.Department>
+@using Part3.Models;
+@{
+    ViewBag.Title = "Department List";
+}
+
+<h2>Department List</h2>
+<ul>
+    @foreach (Department deparment in Model)
+    {
+        <li>
+            @Html.ActionLink(deparment.Name, "EmployeeList", "Employee", new { departmentID = deparment.DepartmentID },null)
+        </li>
+    }
+</ul>
