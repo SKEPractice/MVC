@@ -10,5 +10,6 @@ namespace Part11_Creating_Views_To_insert_data.Models
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Student> students { get; set; }
     }
 }
