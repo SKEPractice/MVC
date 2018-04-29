@@ -37,7 +37,7 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
         //    return Redirect("Index");
         //}
 
-            //Using parameter insted of form collection object
+        //Using parameter insted of form collection object
         //[HttpPost]
         //public ActionResult Create(string name,string gender,string address,DateTime dateOfBirth)
         //{
@@ -52,7 +52,7 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
         //}
 
 
-            //We can also take object as a parameter
+        //We can also take object as a parameter
         //[HttpPost]
         //public ActionResult create(Student student)
         //{
@@ -65,22 +65,21 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
         //    return View();
         //}
 
-            /* save operation can be done without passing any parameters using modelupdate object and eleminate method overloading using 
-             * renaming the method name and using action name attribute */
+        /* save operation can be done without passing any parameters using modelupdate object and eleminate method overloading using 
+         * renaming the method name and using action name attribute */
         [HttpPost]
         [ActionName("Create")]
         public ActionResult Create_Post()
         {
+            Student student = new Student();
+            UpdateModel(student);
             if (ModelState.IsValid)
             {
-                Student student = new Student();
-                UpdateModel(student);
                 db.students.Add(student);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View();
-
         }
 
     }
