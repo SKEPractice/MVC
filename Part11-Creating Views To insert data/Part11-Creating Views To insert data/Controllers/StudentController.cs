@@ -23,17 +23,46 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //public ActionResult Create(FormCollection frmCollection)
+        //{
+        //    Student student = new Student();
+        //    student.Name = frmCollection["Name"];
+        //    student.Gender = frmCollection["Gender"];
+        //    student.Address = frmCollection["Address"];
+        //    student.DateOfBirth = Convert.ToDateTime(frmCollection["DateOfBirth"]);
+        //    db.students.Add(student);
+        //    db.SaveChanges();
+        //    return Redirect("Index");
+        //}
+
+            //Using parameter insted of form collection object
+        //[HttpPost]
+        //public ActionResult Create(string name,string gender,string address,DateTime dateOfBirth)
+        //{
+        //    Student student = new Student();
+        //    student.Name = name;
+        //    student.Gender = gender;
+        //    student.Address = address;
+        //    student.DateOfBirth = Convert.ToDateTime(dateOfBirth);
+        //    db.students.Add(student);
+        //    db.SaveChanges();
+        //    return Redirect("Index");
+        //}
+
+
+            //We can also take object as a parameter
         [HttpPost]
-        public ActionResult Create(FormCollection frmCollection)
+        public ActionResult create(Student student)
         {
-            Student student = new Student();
-            student.Name = frmCollection["Name"];
-            student.Gender = frmCollection["Gender"];
-            student.Address = frmCollection["Address"];
-            student.DateOfBirth = Convert.ToDateTime(frmCollection["DateOfBirth"]);
-            db.students.Add(student);
-            db.SaveChanges();
-            return Redirect("Index");
+            if (ModelState.IsValid)
+            {
+                db.students.Add(student);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
+
     }
 }
