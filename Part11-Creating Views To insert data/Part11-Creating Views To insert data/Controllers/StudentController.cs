@@ -18,7 +18,8 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        [ActionName("Create")]
+        public ActionResult Create_Get()
         {
             return View();
         }
@@ -52,16 +53,29 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
 
 
             //We can also take object as a parameter
+        //[HttpPost]
+        //public ActionResult create(Student student)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.students.Add(student);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View();
+        //}
+
+            /* save operation can be done without passing any parameters using modelupdate object and eleminate method overloading using 
+             * renaming the method name and using action name attribute */
         [HttpPost]
-        public ActionResult create(Student student)
+        [ActionName("Create")]
+        public ActionResult Create_Post()
         {
-            if (ModelState.IsValid)
-            {
-                db.students.Add(student);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View();
+            Student student = new Student();
+            UpdateModel(student);
+            db.students.Add(student);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
     }
