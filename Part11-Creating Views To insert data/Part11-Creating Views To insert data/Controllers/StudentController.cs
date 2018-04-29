@@ -82,25 +82,43 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Edit(int id)
+        [ActionName("Edit")]
+        public ActionResult Edit_Get(int id)
         {
             Student student = db.students.Single(stu => stu.ID == id);
             return View(student);
         }
+
+        //edit post using mode as  parameter this may caus unintended update
+        //[HttpPost]
+        //public ActionResult Edit(Student studentUpdate)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        Student student = db.students.Single(stu => stu.ID == studentUpdate.ID);
+        //        student.Name = studentUpdate.Name;
+        //        student.Address = studentUpdate.Address;
+        //        student.Gender = studentUpdate.Gender;
+        //        student.DateOfBirth = studentUpdate.DateOfBirth;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(studentUpdate);
+        //}
+
+        //To avoid unintended update we explicitly the properties that we want to in model binding
         [HttpPost]
-        public ActionResult Edit(Student studentUpdate)
+        [ActionName("Edit")]
+        public ActionResult Edit_Post(int id)
         {
+            Student student = db.students.Single(stu => stu.ID == id);
+            UpdateModel(student, null, null, new string[] { "Name" });
             if (ModelState.IsValid)
             {
-                Student student = db.students.Single(stu => stu.ID == studentUpdate.ID);
-                student.Name = studentUpdate.Name;
-                student.Address = studentUpdate.Address;
-                student.Gender = studentUpdate.Gender;
-                student.DateOfBirth = studentUpdate.DateOfBirth;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(studentUpdate);
+            return View();
         }
     }
 }
