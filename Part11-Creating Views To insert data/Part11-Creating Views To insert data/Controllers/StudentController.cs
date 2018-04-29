@@ -71,11 +71,16 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
         [ActionName("Create")]
         public ActionResult Create_Post()
         {
-            Student student = new Student();
-            UpdateModel(student);
-            db.students.Add(student);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                Student student = new Student();
+                UpdateModel(student);
+                db.students.Add(student);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+
         }
 
     }
