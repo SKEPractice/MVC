@@ -107,18 +107,41 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
         //}
 
         //To avoid unintended update we explicitly the properties that we want to in model binding
+        //[HttpPost]
+        //[ActionName("Edit")]
+        //public ActionResult Edit_Post(int id)
+        //{
+        //    Student student = db.students.Single(stu => stu.ID == id);
+        //    //Black list model binding
+        //    UpdateModel(student, null, null, new string[] { "Name" });
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View();
+        //}
+
+        //Using Bind attribute we are abale to specify our include or exclude list insted of using 
+        //string arry in update model function
         [HttpPost]
         [ActionName("Edit")]
-        public ActionResult Edit_Post(int id)
+        //public ActionResult Edit_Post([Bind(Include = "ID,Gender,Address,DateOfBirth")] Student studentUpdate)
+        //{
+        public ActionResult Edit_Post([Bind(Exclude = "Name")] Student studentUpdate)
         {
-            Student student = db.students.Single(stu => stu.ID == id);
-            UpdateModel(student, null, null, new string[] { "Name" });
+            studentUpdate.Name = db.students.Single(stu => stu.ID == studentUpdate.ID).Name;
             if (ModelState.IsValid)
             {
+                Student student = db.students.Single(stu => stu.ID == studentUpdate.ID);
+                student.Address = studentUpdate.Address;
+                student.Gender = studentUpdate.Gender;
+                student.DateOfBirth = studentUpdate.DateOfBirth;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(studentUpdate);
         }
+
     }
 }

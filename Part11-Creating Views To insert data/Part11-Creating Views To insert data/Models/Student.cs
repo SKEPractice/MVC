@@ -12,7 +12,6 @@ namespace Part11_Creating_Views_To_insert_data.Models
     public class Student
     {
         public int ID { get; set; }
-        [Required]
         public string Name { get; set; }
         [Required]
         public string Gender { get; set; }
