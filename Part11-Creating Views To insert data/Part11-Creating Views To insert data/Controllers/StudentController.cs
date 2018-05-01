@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Part11_Creating_Views_To_insert_data.Models;
+using Part11_Creating_Views_To_insert_data.Models.Interfaces;
 
 namespace Part11_Creating_Views_To_insert_data.Controllers
 {
@@ -13,7 +14,7 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            List<Student> studentList = db.students.ToList();
+            List<Student> studentList = db.Students.ToList();
             return View(studentList);
         }
 
@@ -75,7 +76,7 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
             UpdateModel(student);
             if (ModelState.IsValid)
             {
-                db.students.Add(student);
+                db.Students.Add(student);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -85,7 +86,7 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
         [ActionName("Edit")]
         public ActionResult Edit_Get(int id)
         {
-            Student student = db.students.Single(stu => stu.ID == id);
+            Student student = db.Students.Single(stu => stu.ID == id);
             return View(student);
         }
 
@@ -128,19 +129,32 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
         [ActionName("Edit")]
         //public ActionResult Edit_Post([Bind(Include = "ID,Gender,Address,DateOfBirth")] Student studentUpdate)
         //{
-        public ActionResult Edit_Post([Bind(Exclude = "Name")] Student studentUpdate)
+        //public ActionResult Edit_Post([Bind(Exclude = "Name")] Student studentUpdate)
+        //{
+        //    studentUpdate.Name = db.students.Single(stu => stu.ID == studentUpdate.ID).Name;
+        //    if (ModelState.IsValid)
+        //    {
+        //        Student student = db.students.Single(stu => stu.ID == studentUpdate.ID);
+        //        student.Address = studentUpdate.Address;
+        //        student.Gender = studentUpdate.Gender;
+        //        student.DateOfBirth = studentUpdate.DateOfBirth;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(studentUpdate);
+        //}
+
+            //using Interfaces to include or exclude properties from model binding
+        public ActionResult Edit_Post(int id)
         {
-            studentUpdate.Name = db.students.Single(stu => stu.ID == studentUpdate.ID).Name;
+            Student student = db.Students.Single(stu => stu.ID == id);
+            UpdateModel<IStudent>(student);
             if (ModelState.IsValid)
             {
-                Student student = db.students.Single(stu => stu.ID == studentUpdate.ID);
-                student.Address = studentUpdate.Address;
-                student.Gender = studentUpdate.Gender;
-                student.DateOfBirth = studentUpdate.DateOfBirth;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(studentUpdate);
+            return View(student);
         }
 
     }
