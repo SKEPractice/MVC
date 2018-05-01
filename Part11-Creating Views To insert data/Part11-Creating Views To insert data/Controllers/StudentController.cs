@@ -157,5 +157,14 @@ namespace Part11_Creating_Views_To_insert_data.Controllers
             return View(student);
         }
 
+        //Deleting data using GET request and its not good
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            Student student = db.Students.Single(stu => stu.ID == id);
+            db.Students.Remove(student);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
