@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  part25-crudusingentityframework:
+    image: ${DOCKER_REGISTRY}part25crudusingentityframework
+    build:
+      context: .\Part25-CRUD Using entityframework
+      dockerfile: Dockerfile

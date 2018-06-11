@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 using Part11_Creating_Views_To_insert_data.Models.Interfaces;
-
 namespace Part11_Creating_Views_To_insert_data.Models
 {
     [Table("tblStudent")]
