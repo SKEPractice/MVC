@@ -11,7 +11,8 @@ namespace Part25_CRUD_Using_entityframework.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employee
     {
         public int EmployeeID { get; set; }
@@ -22,4 +23,5 @@ namespace Part25_CRUD_Using_entityframework.Models
     
         public virtual Department Department { get; set; }
     }
+   
 }

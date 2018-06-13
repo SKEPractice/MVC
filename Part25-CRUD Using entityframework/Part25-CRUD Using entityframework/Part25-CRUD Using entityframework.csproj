@@ -164,6 +164,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeEntity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblDepartment.cs" />
+    <Compile Include="Models\tblEmployee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
