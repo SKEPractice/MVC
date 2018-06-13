@@ -20,7 +20,7 @@ namespace Part25_CRUD_Using_entityframework.Models
         public string City { get; set; }
         public string Gender { get; set; }
         public Nullable<int> DepartmentID { get; set; }
-    
+
         public virtual Department Department { get; set; }
     }
    

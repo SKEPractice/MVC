@@ -50,6 +50,10 @@ namespace Part25_CRUD_Using_entityframework.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EmployeeID,Name,City,Gender,DepartmentID")] Employee employee)
         {
+            if (string.IsNullOrEmpty(employee.Name))
+            {
+                ModelState.AddModelError("Name", "Name field is requred");
+            }
             if (ModelState.IsValid)
             {
                 db.Employees.Add(employee);
@@ -82,11 +86,17 @@ namespace Part25_CRUD_Using_entityframework.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeID,Name,City,Gender,DepartmentID")] Employee employee)
+        public ActionResult Edit( Employee employee)
         {
+            Employee employeeFromDB = db.Employees.Single(emp => emp.EmployeeID == employee.EmployeeID);
+            employeeFromDB.Gender = employee.Gender;
+            employeeFromDB.DepartmentID = employee.DepartmentID;
+            employeeFromDB.City = employee.City;
+            employee.Name = employeeFromDB.Name;
+            employee.Department = employee.DepartmentID != null?employee.Department = db.Departments.Single(dept => dept.DepartmentID == employee.DepartmentID) : null;
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                db.Entry(employeeFromDB).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -13,7 +13,6 @@ namespace Part25_CRUD_Using_entityframework.Models
     }
     public class MetaDataEmployee
     {
-        [Required]
         public int EmployeeID { get; set; }
         [Required]
         public string Name { get; set; }
