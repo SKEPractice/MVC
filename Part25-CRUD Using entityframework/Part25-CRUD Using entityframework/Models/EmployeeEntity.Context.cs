@@ -13,10 +13,10 @@ namespace Part25_CRUD_Using_entityframework.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EmployeeContext : DbContext
+    public partial class EmployeeEntity : DbContext
     {
-        public EmployeeContext()
-            : base("name=EmployeeContext")
+        public EmployeeEntity()
+            : base("name=EmployeeEntity")
         {
         }
     

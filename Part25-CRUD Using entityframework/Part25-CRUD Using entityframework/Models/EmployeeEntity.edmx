@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="VankatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblDepartment">
           <Key>
             <PropertyRef Name="DepartmentID" />
@@ -34,7 +34,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ModelsStoreContainer">
+        <EntityContainer Name="VankatModelStoreContainer">
           <EntitySet Name="tblDepartment" EntityType="Self.tblDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__tblEmploy__Depar__22AA2996" Association="Self.FK__tblEmploy__Depar__22AA2996">
@@ -42,25 +42,18 @@
             <End Role="tblEmployee" EntitySet="tblEmployee" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="EmployeeContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Departments" EntityType="Models.Department" />
-          <EntitySet Name="Employees" EntityType="Models.Employee" />
-          <AssociationSet Name="FK__tblEmploy__Depar__22AA2996" Association="Models.FK__tblEmploy__Depar__22AA2996">
-            <End Role="tblDepartment" EntitySet="Departments" />
-            <End Role="tblEmployee" EntitySet="Employees" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="VankatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="DepartmentID" />
           </Key>
           <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employees" Relationship="Models.FK__tblEmploy__Depar__22AA2996" FromRole="tblDepartment" ToRole="tblEmployee" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__tblEmploy__Depar__22AA2996" FromRole="tblDepartment" ToRole="tblEmployee" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -71,11 +64,11 @@
           <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DepartmentID" Type="Int32" />
-          <NavigationProperty Name="Department" Relationship="Models.FK__tblEmploy__Depar__22AA2996" FromRole="tblEmployee" ToRole="tblDepartment" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__tblEmploy__Depar__22AA2996" FromRole="tblEmployee" ToRole="tblDepartment" />
         </EntityType>
         <Association Name="FK__tblEmploy__Depar__22AA2996">
-          <End Type="Models.Department" Role="tblDepartment" Multiplicity="0..1" />
-          <End Type="Models.Employee" Role="tblEmployee" Multiplicity="*" />
+          <End Role="tblDepartment" Type="VankatModel.Department" Multiplicity="0..1" />
+          <End Role="tblEmployee" Type="VankatModel.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblDepartment">
               <PropertyRef Name="DepartmentID" />
@@ -85,28 +78,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="EmployeeEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="VankatModel.Department" />
+          <EntitySet Name="Employees" EntityType="VankatModel.Employee" />
+          <AssociationSet Name="FK__tblEmploy__Depar__22AA2996" Association="Self.FK__tblEmploy__Depar__22AA2996">
+            <End Role="tblDepartment" EntitySet="Departments" />
+            <End Role="tblEmployee" EntitySet="Employees" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="EmployeeContext">
+        <EntityContainerMapping StorageEntityContainer="VankatModelStoreContainer" CdmEntityContainer="EmployeeEntity">
           <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="Models.Department">
+            <EntityTypeMapping TypeName="VankatModel.Department">
               <MappingFragment StoreEntitySet="tblDepartment">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="Models.Employee">
+            <EntityTypeMapping TypeName="VankatModel.Employee">
               <MappingFragment StoreEntitySet="tblEmployee">
-                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

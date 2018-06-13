@@ -11,7 +11,8 @@ namespace Part25_CRUD_Using_entityframework.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Department
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,5 +26,15 @@ namespace Part25_CRUD_Using_entityframework.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
+    }
+    [MetadataType(typeof(MetaDataType))]
+    public partial class Department
+    {
+
+    }
+    public class MetaDataType
+    {
+        [Display(Name ="Department Name")]
+        public string Name { get; set; }
     }
 }

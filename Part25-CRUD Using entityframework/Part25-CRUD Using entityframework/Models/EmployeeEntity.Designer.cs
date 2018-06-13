@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\SKE-USERS\source\repos\New folder\MVC\Part25-CRUD Using entityframework\Part25-CRUD Using entityframework\Models\EmployeeDataModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\SKE-USERS\source\repos\New folder\MVC\Part25-CRUD Using entityframework\Part25-CRUD Using entityframework\Models\EmployeeEntity.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

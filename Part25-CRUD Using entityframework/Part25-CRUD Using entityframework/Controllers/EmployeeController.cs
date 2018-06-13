@@ -12,7 +12,7 @@ namespace Part25_CRUD_Using_entityframework.Controllers
 {
     public class EmployeeController : Controller
     {
-        private EmployeeContext db = new EmployeeContext();
+        private EmployeeEntity db = new EmployeeEntity();
 
         // GET: Employee
         public ActionResult Index()
