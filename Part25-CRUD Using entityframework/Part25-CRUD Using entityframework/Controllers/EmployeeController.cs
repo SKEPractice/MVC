@@ -21,6 +21,19 @@ namespace Part25_CRUD_Using_entityframework.Controllers
             return View(employees.ToList());
         }
 
+        //GET: Employee by Department
+        [HttpGet]
+        public ActionResult EmployeeByDepart()
+        {
+            var employees = db.Employees.Include("Department")
+                            .GroupBy(x => x.Department.Name)
+                            .Select(y => new DepartmentTotal
+                            {
+                                Name = y.Key,
+                                Total = y.Count()
+                            }).ToList().OrderByDescending(y => y.Total);
+            return View(employees);
+        }
         // GET: Employee/Details/5
         public ActionResult Details(int? id)
         {
